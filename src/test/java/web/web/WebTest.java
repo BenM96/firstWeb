@@ -14,7 +14,7 @@ import org.junit.Test;
 public class WebTest {
 	
 	static WebDriver driver;
-	String url="https://www.google.co.uk/";
+	String url="http://thedemosite.co.uk/";
 	
 	@BeforeClass
 	public static void setup() {
@@ -31,10 +31,15 @@ public class WebTest {
 	@Test
 	public void test1() {
 		driver.get(url);
-    	driver.findElement(By.xpath("//*[@id=\"tsf\"]/div[2]/div/div[1]/div/div[1]/input")).sendKeys("dogs"+ Keys.ENTER);
-    	String ran=driver.findElement(By.xpath("//*[@id=\"rhs_block\"]/div/div[1]/div/div[1]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div[1]/span")).getText();
-    	assertEquals("Dog", ran);
-    	
+		driver.findElement(By.xpath("/html/body/div/center/table/tbody/tr[2]/td/div/center/table/tbody/tr/td[2]/p/small/a[4]")).click();
+		assertEquals(driver.getCurrentUrl(),"http://thedemosite.co.uk/login.php");
+	}
+	
+	@Test
+	public void test2() {
+		driver.get(url);
+		driver.findElement(By.xpath("/html/body/div/center/table/tbody/tr[2]/td/div/center/table/tbody/tr/td[2]/p/small/a[4]")).click();
+		driver.findElement(By.name("username")).sendKeys("john"+Keys.TAB+"1234"+Keys.TAB+Keys.ENTER);
 	}
 
 }
